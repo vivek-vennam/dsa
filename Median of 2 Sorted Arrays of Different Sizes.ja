@@ -1,0 +1,36 @@
+class GFG
+{ 
+    
+    static double solve(int a[], int b[], int n, int m,int ind){
+        int count = -1;
+        int ans = -1;
+        int i = 0,j=0;
+        while(i<n && j<m){
+            int val;
+            if(a[i] < b[j]) val = a[i++];
+            else    val = b[j++];
+            count++;
+            if(count == ind)    ans = val;
+            
+        }
+        while(i<n && count < ind){
+            int val = a[i++];
+            count++;
+            if(count == ind)    ans = val;
+            
+        }
+        while(j<m && count < ind){
+            int val = b[j++];
+            count++;
+            if(count == ind)    ans = val;    
+        }
+        return ans;
+    }
+    static double medianOfArrays(int n, int m, int a[], int b[]) 
+    {
+        // Your Code Here
+        if((n+m)%2==0)  return (solve(a,b,n,m,(n+m)/2) + solve(a,b,n,m,(n+m)/2-1))/2;
+        else    return solve(a,b,n,m,(n+m)/2);
+        
+    }
+}
